@@ -1,15 +1,35 @@
 # pdf_merge
 
-A new flutter plugin project.
+Merge many PDF file to one.
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+import 'package:pdf_merge/pdf_merge.dart';
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+  Future<String> PdfMerger(List<String> paths) async {
+    String text = "";
+    try {
+      path = await PdfMerge.PdfMerger(paths); // Return path to merge PDF file.
+    } on PlatformException {
+      text = '';
+    }
+    return text;
+  }
+```
+```
+  @override
+  Widget build(BuildContext context) {
+    getPermission();
 
+  PdfMerger(paths).then((path) {
+    setState(() {
+      if(path!='')
+      {
+        OpenFile.open(path); // https://pub.dev/packages/open_file
+      }
+    });
+  });
+
+})
+```
